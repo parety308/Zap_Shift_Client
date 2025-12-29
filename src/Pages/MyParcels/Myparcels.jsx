@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure/useAxiosSecure';
 import { MdOutlinePageview } from 'react-icons/md';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const Myparcels = () => {
     const { user } = useAuth();
@@ -12,6 +13,7 @@ const Myparcels = () => {
         data: parcels = [],
         isLoading,
         isError,
+        refetch
     } = useQuery({
         enabled: !!user,
         queryKey: ['my-parcels', user?.email],
@@ -24,10 +26,44 @@ const Myparcels = () => {
     if (isLoading) return <h2>Loading parcels...</h2>;
     if (isError) return <h2>Something went wrong</h2>;
 
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/parcels/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Parcel has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
 
     }
-    const handlePayment = (p) => {
+    const handlePayment = async (parcel) => {
+        const paymentInfo = {
+            cost: parcel.cost,
+            parcelId: parcel._id,
+            senderEmail: parcel.senderEmail,
+            parcelName: parcel.parcelName
+        }
+        const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
+        window.location.assign(res.data.url);
 
     }
     return (
@@ -58,8 +94,9 @@ const Myparcels = () => {
                                     <td className="text-center">{p.cost}</td>
                                     <td className="text-center">
                                         {
-                                            p.paymentStatus === 'paid' ? <span className=" btn bg-blue-100">Paid</span> :
+                                            p.paymentStatus === 'paid' ? <span className=" btn bg-blue-300">Paid</span> :
                                                 <button onClick={() => { handlePayment(p) }} className="btn bg-lime-400 ">Pay</button>
+                                            // <Link to={`/dashboard/my-payments/${p._id}`} className="btn bg-lime-400 ">Pay</Link>
                                         }
                                     </td>
                                     <td className="text-center">

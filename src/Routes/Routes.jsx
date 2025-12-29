@@ -11,6 +11,9 @@ import BeRider from "../Pages/BeRider/BeRider";
 import DashBoard from "../Pages/DashBoard/DashBoard";
 import Myparcels from "../Pages/MyParcels/Myparcels";
 import ServiceCard from "../components/ServiceCard/ServiceCard";
+import MyPayments from "../Pages/MyPayments/MyPayments";
+import PaymentSuccessPage from "../Pages/PaymentSuccessPage/PaymentSuccessPage";
+import PaymentCancelledPage from "../Pages/PaymentCancelledPage/PaymentCancelledPage";
 
 export const router = createBrowserRouter([
     {
@@ -20,7 +23,7 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: HomePage,
-                loader:()=>fetch('services.json').then(res => res.json())
+                loader: () => fetch('services.json').then(res => res.json())
             },
             {
                 path: "/coverage",
@@ -56,10 +59,22 @@ export const router = createBrowserRouter([
     {
         path: 'dashboard',
         element: <PrivateRoutes><DashBoard /></PrivateRoutes>,
-        children:[
+        children: [
             {
-                path:'my-parcels',
-                Component:Myparcels
+                path: 'my-parcels',
+                Component: Myparcels
+            },
+            {
+                path: 'my-payments/:id',
+                Component: MyPayments
+            },
+            {
+                path: 'payment-success',
+                Component: PaymentSuccessPage
+            },
+            {
+                path: 'payment-cancelled',
+                Component: PaymentCancelledPage
             }
         ]
     }

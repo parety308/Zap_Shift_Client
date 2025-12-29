@@ -66,7 +66,7 @@ const SendPercelPage = () => {
                             text: "Your Parcel has been taken for delivery,Please Pay.",
                             icon: "success"
                         });
-                        //navigate('/dashboard/my-parcels')
+                        navigate('/dashboard/my-parcels')
                     })
             }
         });
