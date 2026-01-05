@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 const Myparcels = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-
     const {
         data: parcels = [],
         isLoading,
@@ -16,12 +15,13 @@ const Myparcels = () => {
         refetch
     } = useQuery({
         enabled: !!user,
-        queryKey: ['my-parcels', user?.email],
+        queryKey: ['my-parcels'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/parcels?email=${user.email}`);
+            const res = await axiosSecure.get('/parcels');
             return res.data;
         },
     });
+
 
     if (isLoading) return <h2>Loading parcels...</h2>;
     if (isError) return <h2>Something went wrong</h2>;
@@ -81,6 +81,7 @@ const Myparcels = () => {
                             <th className="text-center text-black">Total Cost</th>
                             <th className="text-center text-black">Payment Status</th>
                             <th className="text-center text-black">Delivery Status</th>
+                            <th className="text-center text-black">Sender Email</th>
                             <th className="text-center text-black">Actions</th>
 
                         </tr>
@@ -101,10 +102,17 @@ const Myparcels = () => {
                                     </td>
                                     <td className="text-center">
                                         {
-                                            p.deliveryStatus === 'deliveried' ? <span className="text-yellow-400 btn btn-outline">Deliveried</span> :
-                                                <span className="text-blue-400 btn btn-outline">Pending</span>
+                                            <span className={`btn btn-outline 
+                                                    ${p.deliveryStatus === 'delivered' && 'text-green-500'}
+                                                    ${p.deliveryStatus === 'pending-pickup' && 'text-yellow-500'}
+                                                    ${p.deliveryStatus === 'in-transit' && 'text-blue-500'}
+                                               `}>
+                                                {p.deliveryStatus || 'Processing'}
+                                            </span>
+
                                         }
                                     </td>
+                                    <td className="text-center">{p.senderEmail}</td>
                                     <td className="text-center">
                                         <button className="btn btn-square mr-1 hover:bg-lime-300"><MdOutlinePageview /></button>
                                         <button className="btn btn-square mr-1 hover:bg-lime-300"><FaRegEdit /></button>

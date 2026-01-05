@@ -1,8 +1,11 @@
-import { CiCreditCard1, CiDeliveryTruck } from 'react-icons/ci';
+import { CiCreditCard1, CiDeliveryTruck, CiUser } from 'react-icons/ci';
 import { FaMotorcycle } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router';
+import useRole from '../../hooks/useRole/useRole';
+import { RiEBike2Fill } from 'react-icons/ri';
 
 const DashBoard = () => {
+    const { role, isLoading } = useRole();
     return (
         <div className="drawer lg:drawer-open w-11/12 ">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -53,12 +56,29 @@ const DashBoard = () => {
                             </Link>
                         </li>
 
-                        <li>
-                            <Link to='/dashboard/rider-application' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider Application">
-                                <span><FaMotorcycle /></span>
-                                <span className="is-drawer-close:hidden">Rider Application</span>
-                            </Link>
-                        </li>
+                        {
+                            role === 'admin' && (<>
+                                <li>
+                                    <Link to='/dashboard/rider-application' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider Application">
+                                        <span><FaMotorcycle /></span>
+                                        <span className="is-drawer-close:hidden">Rider Application</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='/dashboard/users-management' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users Management">
+                                        <span><CiUser /></span>
+                                        <span className="is-drawer-close:hidden">Users Management</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to='/dashboard/assign-riders' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assign Riders">
+                                        <span><RiEBike2Fill /></span>
+                                        <span className="is-drawer-close:hidden">Assign Riders</span>
+                                    </Link>
+                                </li>
+
+                            </>)
+                        }
                     </ul>
                 </div>
             </div>

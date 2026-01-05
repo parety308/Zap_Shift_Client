@@ -16,6 +16,9 @@ import PaymentSuccessPage from "../Pages/PaymentSuccessPage/PaymentSuccessPage";
 import PaymentCancelledPage from "../Pages/PaymentCancelledPage/PaymentCancelledPage";
 import PaymentHistory from "../Pages/PaymentHistory/PaymentHistory";
 import RidersApplicationPage from "../Pages/RidersApplicationPage/RidersApplicationPage";
+import UsersManagemnentPage from "../Pages/UsersManagementPage/UsersManagemnentPage";
+import AdminRoute from "./AdminRoute";
+import AssignRiders from "../Pages/AssignRiders/AssignRiders";
 
 export const router = createBrowserRouter([
     {
@@ -80,12 +83,20 @@ export const router = createBrowserRouter([
                 Component: PaymentCancelledPage
             },
             {
-                path:'payment-history',
-                Component:PaymentHistory
+                path: 'payment-history',
+                Component: PaymentHistory
             },
             {
-                path:'rider-application',
-                Component:RidersApplicationPage
+                path: 'rider-application',
+                element: <AdminRoute><RidersApplicationPage /></AdminRoute>
+            },
+            {
+                path: 'users-management',
+                element: <AdminRoute><UsersManagemnentPage /></AdminRoute>
+            },
+            {
+                path: 'assign-riders',
+                element: <AdminRoute><AssignRiders /></AdminRoute>
             }
         ]
     }

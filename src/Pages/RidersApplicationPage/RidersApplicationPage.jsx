@@ -8,7 +8,7 @@ const RidersApplicationPage = () => {
     const axiosSecure = useAxiosSecure();
 
     const { data: riders = [], refetch } = useQuery({
-        queryKey: ['riders', 'pending'],
+        queryKey: ['riders', 'pending-application'],
         queryFn: async () => {
             const res = await axiosSecure.get('/riders');
             return res.data;
@@ -57,7 +57,8 @@ const RidersApplicationPage = () => {
                             <th className='text-center text-black'>Name</th>
                             <th className='text-center text-black'>Email</th>
                             <th className='text-center text-black'>License No</th>
-                            <th className='text-center text-black'>Status</th>
+                            <th className='text-center text-black'>Application Status</th>
+                            <th className='text-center text-black'>Work Status</th>
                             <th className='text-center text-black'>District</th>
                             <th className='text-center text-black'>Created At</th>
                             <th className='text-center text-black'>Actions</th>
@@ -81,7 +82,9 @@ const RidersApplicationPage = () => {
                                         >
                                             {rider.status}
                                         </span>
+
                                     </td>
+                                    <td className={`badge ${rider.workStatus === 'available' ? 'bg-green-500 text-white' : 'bg-blue-400 text-black'} text-center`}>{rider.workStatus || 'Not Assigned'}</td>
                                     <td className='text-center text-black'>{rider.district}</td>
                                     <td className='text-center text-black'>
                                         {new Date(rider.createdAt).toLocaleDateString()}
