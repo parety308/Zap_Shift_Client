@@ -1,8 +1,9 @@
 import { CiCreditCard1, CiDeliveryTruck, CiUser } from 'react-icons/ci';
-import { FaMotorcycle } from 'react-icons/fa';
+import { FaMotorcycle, FaTasks } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router';
 import useRole from '../../hooks/useRole/useRole';
 import { RiEBike2Fill } from 'react-icons/ri';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
 const DashBoard = () => {
     const { role, isLoading } = useRole();
@@ -56,6 +57,28 @@ const DashBoard = () => {
                             </Link>
                         </li>
 
+
+                        {/* Rider-specific menu items */}
+                        {
+                            role === 'rider' && (
+                                <>
+                                    <li>
+                                        <Link to='/dashboard/assigned-deliveries' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Assigned Deliveries">
+                                            <span><FaTasks /></span>
+                                            <span className="is-drawer-close:hidden">Assigned Deliveries</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/dashboard/completed-deliveries' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Completed Deliveries">
+                                            <span><IoCheckmarkDoneSharp /></span>
+                                            <span className="is-drawer-close:hidden">Completed Deliveries</span>
+                                        </Link>
+                                    </li>
+                                </>
+                            )
+                        }
+
+                        {/* Admin-specific menu items */}
                         {
                             role === 'admin' && (<>
                                 <li>

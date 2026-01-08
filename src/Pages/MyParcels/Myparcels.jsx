@@ -4,6 +4,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure/useAxiosSecure';
 import { MdOutlinePageview } from 'react-icons/md';
 import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const Myparcels = () => {
     const { user } = useAuth();
@@ -60,7 +61,8 @@ const Myparcels = () => {
             cost: parcel.cost,
             parcelId: parcel._id,
             senderEmail: parcel.senderEmail,
-            parcelName: parcel.parcelName
+            parcelName: parcel.parcelName,
+            trackingId:parcel.trackingId
         }
         const res = await axiosSecure.post('/create-checkout-session', paymentInfo);
         window.location.assign(res.data.url);
@@ -69,7 +71,8 @@ const Myparcels = () => {
     return (
         <div>
             <h2 className="text-3xl font-semibold w-10/12 mx-auto my-5">
-                My Parcels : {parcels.length}
+                {
+                    user.role === 'user' ? 'My Parcels' : 'All Parcels'} : {parcels.length}
             </h2>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-10/12 mx-auto">
                 <table className="table">
@@ -81,7 +84,9 @@ const Myparcels = () => {
                             <th className="text-center text-black">Total Cost</th>
                             <th className="text-center text-black">Payment Status</th>
                             <th className="text-center text-black">Delivery Status</th>
+                            <th className='text-center text-black'>Sender Name</th>
                             <th className="text-center text-black">Sender Email</th>
+                            <th className='text-center text-black'>Tracking Id</th>
                             <th className="text-center text-black">Actions</th>
 
                         </tr>
@@ -105,14 +110,18 @@ const Myparcels = () => {
                                             <span className={`btn btn-outline 
                                                     ${p.deliveryStatus === 'delivered' && 'text-green-500'}
                                                     ${p.deliveryStatus === 'pending-pickup' && 'text-yellow-500'}
-                                                    ${p.deliveryStatus === 'in-transit' && 'text-blue-500'}
+                                                    ${p.deliveryStatus === 'driver-assigned' && 'text-blue-500'}
                                                `}>
                                                 {p.deliveryStatus || 'Processing'}
                                             </span>
 
                                         }
                                     </td>
+                                    <td className="text-center">{p.senderName}</td>
                                     <td className="text-center">{p.senderEmail}</td>
+                                    <td className='text-center'>
+                                        <Link to={`/tracking-pracel/${p.trackingId}`}>{p.trackingId}</Link>
+                                    </td>
                                     <td className="text-center">
                                         <button className="btn btn-square mr-1 hover:bg-lime-300"><MdOutlinePageview /></button>
                                         <button className="btn btn-square mr-1 hover:bg-lime-300"><FaRegEdit /></button>

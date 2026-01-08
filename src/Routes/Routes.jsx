@@ -19,6 +19,10 @@ import RidersApplicationPage from "../Pages/RidersApplicationPage/RidersApplicat
 import UsersManagemnentPage from "../Pages/UsersManagementPage/UsersManagemnentPage";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../Pages/AssignRiders/AssignRiders";
+import AssignedDeliveries from "../Pages/AssignedDeliveries/AssignedDeliveries";
+import RiderRoute from "./RiderRoute";
+import CompleteDeliveries from "../Pages/CompleteDeliveries/CompleteDeliveries";
+import TrackingParcelPage from "../Pages/TrackingParcelPage/TrackingParcelPage";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +48,10 @@ export const router = createBrowserRouter([
                 path: '/be-rider',
                 element: <PrivateRoutes><BeRider /></PrivateRoutes>,
                 loader: () => fetch('/serviceCenters.json').then(res => res.json())
+            },
+            {
+                path: '/tracking-pracel/:trackingId',
+                Component: TrackingParcelPage
             }
 
         ]
@@ -97,6 +105,14 @@ export const router = createBrowserRouter([
             {
                 path: 'assign-riders',
                 element: <AdminRoute><AssignRiders /></AdminRoute>
+            },
+            {
+                path: 'assigned-deliveries',
+                element: <RiderRoute><AssignedDeliveries /></RiderRoute>
+            },
+            {
+                path: 'completed-deliveries',
+                element: <RiderRoute><CompleteDeliveries /></RiderRoute>
             }
         ]
     }
