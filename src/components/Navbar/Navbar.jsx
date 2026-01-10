@@ -9,12 +9,13 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/send-percel'>Send Percel</NavLink></li>
-        <li><NavLink to='/coverage'>Coverage</NavLink></li>
+        <li><NavLink to='/coverage'>Coverage Areas</NavLink></li>
         <li><NavLink to='/be-rider'>Be a Rider</NavLink></li>
 
         {
             user && <li><NavLink to='/dashboard'>DashBoard</NavLink></li>
         }
+        <li><NavLink to='/about-us'>About Us</NavLink></li>
     </>
     const handleLogOut = () => {
         logOut().then(() => {

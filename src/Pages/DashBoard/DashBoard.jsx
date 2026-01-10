@@ -4,9 +4,17 @@ import { Link, Outlet } from 'react-router';
 import useRole from '../../hooks/useRole/useRole';
 import { RiEBike2Fill } from 'react-icons/ri';
 import { IoCheckmarkDoneSharp } from 'react-icons/io5';
+import Loading from '../../components/Loading/Loading';
+import logo from '../../assets/logo.png'
+import Logo from '../../components/Logo/Logo';
+import { RxDashboard } from "react-icons/rx";
+
 
 const DashBoard = () => {
     const { role, isLoading } = useRole();
+    if (isLoading) {
+        return <Loading />
+    }
     return (
         <div className="drawer lg:drawer-open w-11/12 ">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -32,11 +40,19 @@ const DashBoard = () => {
                     {/* Sidebar content here */}
                     <ul className="menu w-full grow">
                         {/* List item */}
+
+                        <li >
+                            <Link to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="HomePage">
+                                <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                                </span>
+                                <span className="is-drawer-close:hidden"><Logo /></span>
+                            </Link>
+                        </li>
                         <li>
-                            <Link to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                            <Link to='/dashboard' className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Dashboard">
                                 {/* Home icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                                <Link to='/' className="is-drawer-close:hidden">Homepage</Link>
+                                <span><RxDashboard /></span>
+                                <Link to='/dashboard' className="is-drawer-close:hidden">Dashboard</Link>
                             </Link>
                         </li>
 

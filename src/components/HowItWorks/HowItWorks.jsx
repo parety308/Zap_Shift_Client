@@ -3,7 +3,7 @@ const HowItWorks = () => {
     return (
         <div className='my-10 w-10/12 mx-auto'>
             <h1 className="text-4xl font-bold">How it Works</h1>
-            <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 my-8">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 my-8">
                 <div className="border p-4 rounded-lg shadow-sm bg-[#FFFFFF] flex flex-col  justify-center items-center gap-2  hover:-translate-y-2 hover:bg-amber-200">
                     <img src={bookingIcon} alt="" />
                     <h3 className='text-2xl font-semibold'>Booking Pick & Drop</h3>
