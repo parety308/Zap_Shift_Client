@@ -1,25 +1,61 @@
-# Zap Shift 
+# 🚚 Zap Shift
 
-Welcome to **Zap Shift**!  
-
-
-## 📊 System Overview Table
-
-| Role            | Key Responsibilities                                                                      | Earnings/Benefits                              |
-| --------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| **User**        | - Book parcels<br>- Pay charges<br>- Track status<br>- Review service                     | - Real-time tracking<br>- Feedback opportunity |
-| **Admin**       | - Assign agents<br>- Manage routing<br>- Oversee warehouses<br>- Monitor operations       | - System control<br>- Operational oversight    |
-| **Rider**       | - Collect/Deliver parcels<br>- Update status<br>- OTP confirmation<br>- Warehouse handoff | - ৳ 80% per delivery in the same city <br> 60% outside |
+**Zap Shift** is a full-stack, door-to-door parcel delivery management system designed to streamline booking, tracking, and nationwide logistics operations across Bangladesh.
 
 ---
 
-## 🛒 Pricing Structure
+## 📌 Overview
 
-| Parcel Type      | Weight    | Within City | Outside City/District |
-| ---------------- | --------- | ----------- | --------------------- |
-| **Document**     | Any       | ৳60         | ৳80                   |
-| **Non-Document** | Up to 3kg | ৳110        | ৳150                  |
-| **Non-Document** | >3kg      | +৳40/kg     | +৳40/kg +৳40 extra    |
+Zap Shift provides a modern logistics solution with:
+- Home & office pickup
+- Real-time parcel tracking
+- Secure OTP-based delivery confirmation
+- Role-based dashboards for **User**, **Admin**, and **Rider**
+
+The system focuses on **efficiency, transparency, and scalability**.
+
+---
+
+## 👥 User Roles
+
+### 🧑 User
+- Create parcel delivery requests
+- Dynamic cost calculation & payment
+- Real-time tracking with tracking number
+- View parcel & payment history
+- Review service after delivery
+
+### 🛠️ Admin
+- Manage users and riders (approve / reject)
+- Assign pickup & delivery riders
+- Control inter-district routing
+- Monitor parcels, payments, and earnings
+
+### 🚴 Rider
+- Pick up and deliver parcels
+- Update parcel status using tracking number
+- Confirm delivery via OTP
+- Earn commission per successful delivery
+
+---
+
+## 📊 System Overview
+
+| Role  | Responsibilities | Benefits |
+|------|------------------|----------|
+| User | Book, pay, track parcels | Real-time tracking |
+| Admin | Manage logistics & users | Full system control |
+| Rider | Pickup & delivery | Earnings per delivery |
+
+---
+
+## 💰 Pricing Structure
+
+| Parcel Type | Weight | Within City | Outside City |
+|------------|--------|-------------|--------------|
+| Document | Any | ৳60 | ৳80 |
+| Non-Document | ≤ 3kg | ৳110 | ৳150 |
+| Non-Document | > 3kg | +৳40/kg | +৳40/kg + ৳40 |
 
 ---
 
@@ -27,34 +63,33 @@ Welcome to **Zap Shift**!
 
 ```mermaid
 flowchart TD
-    A[User Adds Parcel to System] -->|Status: Unpaid| B[User Pays for Parcel Delivery]
-    B -->|Status: Paid| C[Admin Assigns Pickup & Delivery Riders]
-    C -->|Status: Ready-to-Pickup| D[Rider Picks Up Parcel]
-    D -->|Status: In-Transit| E{Within City?}
+A[User Adds Parcel] --> B[Payment Completed]
+B --> C[Admin Assigns Rider]
+C --> D[Rider Picks Parcel]
+D --> E{Within City?}
+E -- Yes --> F[Out for Delivery]
+F --> G[Delivered]
+E -- No --> H[Service Center]
+H --> I[Shipped]
+I --> J[Delivered]
 
-    E -- Yes --> F1[Rider Out for Delivery]
-    F1 -->|Status: Ready-for-Delivery| G1[Rider Delivers Parcel]
-    G1 -->|Status: Delivered| H1[Parcel Delivery Completed]
+## 🧰 Technology Stack
 
-    E -- No --> F2[Parcel Reaches Warehouse]
-    F2 -->|Status: Reached-Warehouse| G2[Parcel Shipped to Destination]
-    G2 -->|Status: Shipped| H2[Rider Out for Delivery]
-    H2 -->|Status: Ready-for-Delivery| I2[Rider Delivers Parcel]
-    I2 -->|Status: Delivered| J2[Parcel Delivery Completed]
+### Frontend
+- **React 19** – Component-based UI
+- **Vite** – Fast development & build tool
+- **Tailwind CSS** – Utility-first styling
+- **DaisyUI** – Prebuilt Tailwind components
+- **React Router v7** – Client-side routing
+- **TanStack React Query** – Server state management
+- **Recharts** – Data visualization & analytics
+- **Leaflet & React-Leaflet** – Map & location services
 
-```
+### Authentication & Services
+- **Firebase Authentication** – Secure login & role-based access
+- **Axios** – API communication
 
----
-
-## 🗂️ Key Features
-
-- **Automated Pricing & Tracking**
-- **Role-based Access & Workflow**
-- **OTP-based Secure Delivery**
-- **Nationwide Coverage (64 districts)**
-- **Transparent Commission Structure**
-
----
-
----
+### Development Tools
+- **ESLint** – Code quality & linting
+- **NPM** – Package management
 
