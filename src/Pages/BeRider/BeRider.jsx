@@ -32,7 +32,7 @@ const BeRider = () => {
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({
-                        title: "Accepted!",
+                        title: "Submitted!",
                         text: "Your Request  has been taken,We will contact with you.",
                         icon: "success"
                     });

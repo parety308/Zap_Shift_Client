@@ -4,20 +4,24 @@ import SocialLogIn from '../SocialLogIn/SocialLogIn';
 import useAuth from '../../../hooks/useAuth/useAuth';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import LogInLoader from '../../../components/logInLoader/logInLoader';
+import { useState } from 'react';
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { signInUser, setUser} = useAuth();
+    const { signInUser} = useAuth();
+    const [loading, setLoading] = useState(false);
+
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
     const handleSignIn = (data) => {
+        setLoading(true);
         signInUser(data.email, data.password)
             .then(res => {
-                setUser(res.user)
+                  setLoading(false);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -25,9 +29,13 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                 navigate(location?.state || '/');
+                setLoading(false);
+                navigate(location?.state || '/');
             })
             .catch(err => console.log(err));
+    }
+    if (loading) {
+        return <LogInLoader />
     }
 
     return (
@@ -57,7 +65,7 @@ const Login = () => {
                             <div><SocialLogIn /></div>
                         </fieldset>
                     </form>
-                    <Link  state={location.state} to='/auth/signup' className='link link-hover text-center text-blue-400'>Have no account ,go to signup</Link>
+                    <Link state={location.state} to='/auth/signup' className='link link-hover text-center text-blue-400'>Have no account ,go to signup</Link>
                 </div>
                 <div>
                     <img src={authImage} alt="" />

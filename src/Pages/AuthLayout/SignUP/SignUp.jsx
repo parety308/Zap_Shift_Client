@@ -6,19 +6,22 @@ import useAuth from '../../../hooks/useAuth/useAuth';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import useAxiosSecure from '../../../hooks/useAxiosSecure/useAxiosSecure';
+import SignUpLoading from '../../../components/SignUpLoading/SignUpLoading';
+import { useState } from 'react';
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const { createUser, setUser, user, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const handleRegistration = (data) => {
-
+    setLoading(true);
     const profileImg = data.photo[0];
     createUser(data.email, data.password)
       .then(res => {
@@ -49,6 +52,7 @@ const SignUp = () => {
             };
             updateUserProfile(userProfile)
               .then(() => {
+                setLoading(false);
                 Swal.fire({
                   position: "top-end",
                   icon: "success",
@@ -56,7 +60,7 @@ const SignUp = () => {
                   showConfirmButton: false,
                   timer: 1500
                 });
-                setUser(res.user);
+
                 navigate(location?.state || '/');
               })
               .catch(err => console.log(err));
@@ -65,6 +69,9 @@ const SignUp = () => {
       })
       .catch(err => console.log(err));
 
+  }
+  if (loading) {
+    return <SignUpLoading />
   }
   return (
     <>

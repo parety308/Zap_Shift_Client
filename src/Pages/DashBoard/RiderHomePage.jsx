@@ -10,9 +10,10 @@ import {
     Tooltip,
     ResponsiveContainer
 } from 'recharts';
+import RiderLoading from '../../components/RiderLoading/RiderLoading';
 
 const RiderHomePage = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const { data: deliveryStat = [] } = useQuery({
@@ -31,17 +32,20 @@ const RiderHomePage = () => {
         value: item.totalDelivered
     }));
 
+    if (loading) {
+        return <RiderLoading />
+    }
     return (
         <div className='w-10/12 mx-auto'>
             <h1 className="text-3xl">Rider Dashboard</h1>
             <h1 className="text-2xl font-semibold my-10 mb-3">Daily Delivered</h1>
             <div style={{ width: '50%', height: 300 }}>
                 <ResponsiveContainer>
-        <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                    <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="value" fill="#8884d8" barSize={20}/>
+                        <Bar dataKey="value" fill="#8884d8" barSize={20} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

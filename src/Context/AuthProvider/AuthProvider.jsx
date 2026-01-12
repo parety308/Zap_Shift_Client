@@ -33,11 +33,11 @@ const AuthProvider = ({ children }) => {
         return sendPasswordResetEmail(auth, email);
 
     }
-
+    // console.log(user);
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser => {
             setUser(currentUser);
-            setLoading(false)
+            setLoading(false);
         }))
         return () => {
             unsubscribe();

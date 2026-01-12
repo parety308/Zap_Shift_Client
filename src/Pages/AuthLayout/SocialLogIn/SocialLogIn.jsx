@@ -2,25 +2,17 @@ import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure/useAxiosSecure";
-import Loading from "../../../components/Loading/Loading";
 
 const SocialLogIn = () => {
-    const { setUser, signInGoogle } = useAuth();
+    const { signInGoogle } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const axiosSecure = useAxiosSecure();
+
     const handleSignIn = (e) => {
         e.preventDefault();
         signInGoogle()
             .then(res => {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Sign Up Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setUser(res.user);
                 //create user in database
                 const newUser = {
                     displayName: res.user.displayName,
@@ -33,7 +25,14 @@ const SocialLogIn = () => {
                             // console.log('User created in database');
                         }
 
-                    })
+                    });
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Sign Up Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 navigate(location?.state || '/');
             })
             .catch(err => console.log(err));

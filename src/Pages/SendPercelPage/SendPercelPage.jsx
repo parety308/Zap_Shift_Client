@@ -27,7 +27,7 @@ const SendPercelPage = () => {
         // console.log(data);
         const isSameDistrict = data.senderDistrict === data.receiverDistrict;
         const isDocument = data.parcelType === 'document';
-        console.log(data);
+        // console.log(data);
         const parcelWeight = parseFloat(data.parcelWeight)
         let cost = 0;
         if (isDocument) {

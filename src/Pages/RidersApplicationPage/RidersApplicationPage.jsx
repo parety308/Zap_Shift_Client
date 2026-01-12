@@ -3,11 +3,12 @@ import React from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure/useAxiosSecure';
 import { FaTrashAlt, FaUserCheck, FaUserMinus } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import RiderLoading from '../../components/RiderLoading/RiderLoading';
 
 const RidersApplicationPage = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: riders = [], refetch } = useQuery({
+    const { data: riders = [], refetch, isLoading } = useQuery({
         queryKey: ['riders', 'pending-application'],
         queryFn: async () => {
             const res = await axiosSecure.get('/riders');
@@ -16,7 +17,7 @@ const RidersApplicationPage = () => {
     });
 
     const updateRiderStatus = (status, rider) => {
-        const updateData = { status: status,email: rider.email };
+        const updateData = { status: status, email: rider.email };
         axiosSecure.patch(`/riders/${rider._id}`, updateData)
             .then(res => {
                 if (res.data.modifiedCount) {
@@ -41,7 +42,10 @@ const RidersApplicationPage = () => {
         updateRiderStatus('rejected', rider);
     }
     const handleDelete = (rider) => {
-        console.log(rider);
+        // console.log(rider);
+    }
+    if (isLoading) {
+        return <RiderLoading />
     }
     return (
         <div className="p-6">

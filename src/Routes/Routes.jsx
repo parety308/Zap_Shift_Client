@@ -24,6 +24,7 @@ import RiderRoute from "./RiderRoute";
 import CompleteDeliveries from "../Pages/CompleteDeliveries/CompleteDeliveries";
 import TrackingParcelPage from "../Pages/TrackingParcelPage/TrackingParcelPage";
 import DashboardHome from "../Pages/DashBoard/DashboardHome";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -76,8 +77,8 @@ export const router = createBrowserRouter([
         element: <PrivateRoutes><DashBoard /></PrivateRoutes>,
         children: [
             {
-                index:true,
-                Component:DashboardHome
+                index: true,
+                Component: DashboardHome
             },
 
             {
@@ -121,5 +122,9 @@ export const router = createBrowserRouter([
                 element: <RiderRoute><CompleteDeliveries /></RiderRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        Component:ErrorPage
     }
 ]);
