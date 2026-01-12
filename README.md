@@ -1,9 +1,7 @@
-# Zap Shift Resources
+# Zap Shift 
 
-Welcome to **Zap Shift Resources**!  
-A curated collection of tools, guides, and assets for developing robust parcel management systems.
+Welcome to **Zap Shift**!  
 
----
 
 ## 📊 System Overview Table
 
