@@ -61,7 +61,7 @@ The system focuses on **efficiency, transparency, and scalability**.
 
 ## 🚚 Delivery Workflow
 
-```mermaid
+## mermaid
 flowchart TD
 A[User Adds Parcel] --> B[Payment Completed]
 B --> C[Admin Assigns Rider]
@@ -73,7 +73,7 @@ E -- No --> H[Service Center]
 H --> I[Shipped]
 I --> J[Delivered]
 
-## 🧰 Technology Stack
+# 🧰 Technology Stack
 
 ### Frontend
 - **React 19** – Component-based UI
@@ -89,7 +89,23 @@ I --> J[Delivered]
 - **Firebase Authentication** – Secure login & role-based access
 - **Axios** – API communication
 
-### Development Tools
+###Development Tools
 - **ESLint** – Code quality & linting
 - **NPM** – Package management
+
+## 🚚 Delivery Workflow
+
+## mermaid
+flowchart TD
+    A[User Adds Parcel] --> B[Payment Completed]
+    B --> C[Admin Assigns Rider]
+    C --> D[Rider Picks Parcel]
+    D --> E{Within City?}
+
+    E -- Yes --> F[Out for Delivery]
+    F --> G[Delivered]
+
+    E -- No --> H[Service Center]
+    H --> I[Shipped]
+    I --> J[Delivered]
 
