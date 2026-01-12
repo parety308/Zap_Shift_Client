@@ -60,18 +60,22 @@ The system focuses on **efficiency, transparency, and scalability**.
 ---
 
 ## 🚚 Delivery Workflow
+## 🚚 Delivery Workflow
 
-## mermaid
+```mermaid
 flowchart TD
-A[User Adds Parcel] --> B[Payment Completed]
-B --> C[Admin Assigns Rider]
-C --> D[Rider Picks Parcel]
-D --> E{Within City?}
-E -- Yes --> F[Out for Delivery]
-F --> G[Delivered]
-E -- No --> H[Service Center]
-H --> I[Shipped]
-I --> J[Delivered]
+    A[User Adds Parcel] --> B[Payment Completed]
+    B --> C[Admin Assigns Rider]
+    C --> D[Rider Picks Parcel]
+    D --> E{Within City?}
+
+    E -- Yes --> F[Out for Delivery]
+    F --> G[Delivered]
+
+    E -- No --> H[Service Center]
+    H --> I[Shipped]
+    I --> J[Delivered]
+
 
 # 🧰 Technology Stack
 
