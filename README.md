@@ -6,6 +6,20 @@ The system provides a modern logistics workflow with **real-time tracking**, **r
 
 ---
 
+## 🌐 Live Website
+- 🔗 https://simple-firebase-auth-c54cc.web.app
+- 🔗 https://zap-shift-currier-service.netlify.app
+
+
+## 💻 Client Repository
+🔗 https://github.com/parety308/Zap_Shift_Client
+
+
+## ⚙️ Server Repository
+🔗 https://github.com/parety308/Zap_Shift_Server
+
+---
+
 ## 🎯 Project Goal
 
 The goal of ZAPSHIFT is to build a scalable logistics system that:
@@ -222,3 +236,15 @@ Admins assign riders and update delivery stages through workflow actions.
 ### Authentication
 - Firebase Authentication
 - JWT Authorization
+
+## 👨‍💻 Author
+
+
+**MD Parvez Hasan**  
+MERN Stack Developer
+
+- 📧 Email: parvezyesrat17032024@gmail.com 
+- 📱 Phone: +8801876097788 
+- 💼 LinkedIn: www.linkedin.com/in/md-parvez-hasan-967729344  
+- 🐙 GitHub:https://github.com/parety308
+
